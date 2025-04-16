@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSE Allianz Guide | Hagelschaden Kalkulationshilfe | PDR TEAM GmbH</title>
+    <style>
+        :root {
+            --primary: #005f87;
+            --secondary: #e6f4f9;
+            --accent: #ff7d00;
+            --text: #333333;
+            --light: #ffffff;
+            --border: #cccccc;
+            --warning: #ffcc00;
+            --error: #ff3333;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        
+        .signature-small {
+            font-size: 12px;
+            color: #666;
+            text-align: right;
+            margin-bottom: 5px;
+        }
+        
+        .copyright {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border: 1px solid #666;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 15px;
+            font-size: 10px;
+            margin-right: 5px;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 20px;
+        }
+        
+        h1, h2, h3 {
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 8px;
+            color: var(--light);
+        }
+        
+        .anleitung {
+            background-color: var(--light);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .anleitung h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .anleitung ol {
+            padding-left: 20px;
+            margin: 0;
+        }
+        
+        .anleitung li {
+            margin-bottom: 8px;
+        }
+        
+        .input-section {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .stundensatz {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: var(--secondary);
+            border-radius: 6px;
+        }
+        
+        .stundensatz label {
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .stundensatz input {
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            width: 100px;
+        }
+        
+        .bauteil {
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+        
+        .bauteil:last-child {
+            border-bottom: none;
+        }
+        
+        .bauteil-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .bauteil-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .material-select {
+            margin-left: 15px;
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+        
+        .dellen-input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .dellen-group {
+            display: flex;
+            align-items: center;
+            background-color: var(--secondary);
+            padding: 10px;
+            border-radius: 6px;
+        }
+        
+        .dellen-group input {
+            width: 60px;
+            padding: 8px;
+            margin: 0 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .results {
+            background-color: var(--secondary);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .result-item {
+            background-color: var(--light);
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .result-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .result-value {
+            font-weight: bold;
+        }
+        
+        .neuwert-input {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .neuwert-input input {
+            width: 100px;
+            padding: 5px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+        
+        .aw-input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .aw-input {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+        
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .warning {
+            color: var(--warning);
+            font-weight: bold;
+        }
+        
+        .error {
+            color: var(--error);
+            font-weight: bold;
+        }
+        
+        .legende {
+            background-color: var(--secondary);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        
+        .legende h3 {
+            margin-top: 0;
+        }
+        
+        .legende ul {
+            padding-left: 20px;
+        }
+        
+        .legende li {
+            margin-bottom: 8px;
+        }
+        
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-style: italic;
+            color: #666;
+        }
+        
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #004a6a;
+        }
+    </style>
+</head>
+<body>
+    <div class="signature-small">
+        <span class="copyright">C</span> PDR TEAM GmbH
+    </div>
+    
+    <header>
+        <h1>🚗 MSE Allianz Guide: Hagelschaden Kalkulationshilfe 🔧</h1>
+        <div class="subtitle">Unterstützung für SAD und Dienstleister bei der Reparaturkostenkalkulation nach MSE-Regeln</div>
+    </header>
+    
+    <div class="anleitung">
+        <h3>Anleitung zur Bedienung:</h3>
+        <ol>
+            <li><strong>Stundensatz</strong> eingeben (muss immer manuell angegeben werden)</li>
+            <li>Für jedes Bauteil:
+                <ol type="a">
+                    <li><strong>Material</strong> auswählen (Metall oder Aluminium)</li>
+                    <li><strong>Anzahl der Dellen</strong> in den jeweiligen Größenkategorien eintragen</li>
+                    <li>Optional: <strong>Arbeitswerte (AW)</strong> manuell anpassen (wird automatisch berechnet, kann aber überschrieben werden)</li>
+                    <li>Optional: <strong>Neuwert des Bauteils</strong> manuell anpassen, falls der geschätzte Wert nicht zutrifft</li>
+                </ol>
+            </li>
+            <li>Am Ende der Seite auf <strong>"Kalkulation durchführen"</strong> klicken</li>
+            <li>Die Ergebnisse werden für jedes Bauteil automatisch berechnet und angezeigt</li>
+        </ol>
+        <p>Hinweis: 10er und 20er Dellen werden automatisch ignoriert (gemäß Allianz Guide)</p>
+        <p>Unten finden Sie eine <strong>Legende und Regelwerk</strong> mit wichtigen Informationen zur Kalkulation.</p>
+    </div>
+    
+    <div class="input-section">
+        <div class="stundensatz">
+            <label for="stundensatz">Stundensatz (€):</label>
+            <input type="number" id="stundensatz" min="0" placeholder="Bitte eingeben">
+            <div style="margin-left: 15px;">10 AW = 1 Stunde</div>
+        </div>
+        
+        <!-- Motorhaube -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Motorhaube</div>
+                <select class="material-select" id="haube-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="haube-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="haube-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="haube-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="haube-aw">-</div>
+                            <input type="number" class="aw-input" id="haube-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="haube-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="haube-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="haube-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="haube-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="haube-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="haube-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="haube-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="haube-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="haube-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="haube-neuwert">-</div>
+                            <input type="number" id="haube-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="haube-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="haube-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Kotflügel links -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Kotflügel links</div>
+                <select class="material-select" id="kotfluegel-links-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="kotfluegel-links-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="kotfluegel-links-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="kotfluegel-links-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="kotfluegel-links-aw">-</div>
+                            <input type="number" class="aw-input" id="kotfluegel-links-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="kotfluegel-links-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="kotfluegel-links-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="kotfluegel-links-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="kotfluegel-links-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="kotfluegel-links-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="kotfluegel-links-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="kotfluegel-links-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="kotfluegel-links-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="kotfluegel-links-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="kotfluegel-links-neuwert">-</div>
+                            <input type="number" id="kotfluegel-links-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="kotfluegel-links-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="kotfluegel-links-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Kotflügel rechts -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Kotflügel rechts</div>
+                <select class="material-select" id="kotfluegel-rechts-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="kotfluegel-rechts-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="kotfluegel-rechts-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="kotfluegel-rechts-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="kotfluegel-rechts-aw">-</div>
+                            <input type="number" class="aw-input" id="kotfluegel-rechts-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="kotfluegel-rechts-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="kotfluegel-rechts-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="kotfluegel-rechts-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="kotfluegel-rechts-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="kotfluegel-rechts-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="kotfluegel-rechts-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="kotfluegel-rechts-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="kotfluegel-rechts-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="kotfluegel-rechts-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="kotfluegel-rechts-neuwert">-</div>
+                            <input type="number" id="kotfluegel-rechts-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="kotfluegel-rechts-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="kotfluegel-rechts-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tür links -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Tür links</div>
+                <select class="material-select" id="tuer-links-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="tuer-links-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="tuer-links-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="tuer-links-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="tuer-links-aw">-</div>
+                            <input type="number" class="aw-input" id="tuer-links-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="tuer-links-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="tuer-links-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="tuer-links-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="tuer-links-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="tuer-links-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="tuer-links-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="tuer-links-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="tuer-links-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="tuer-links-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="tuer-links-neuwert">-</div>
+                            <input type="number" id="tuer-links-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="tuer-links-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="tuer-links-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tür rechts -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Tür rechts</div>
+                <select class="material-select" id="tuer-rechts-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="tuer-rechts-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="tuer-rechts-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="tuer-rechts-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="tuer-rechts-aw">-</div>
+                            <input type="number" class="aw-input" id="tuer-rechts-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="tuer-rechts-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="tuer-rechts-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="tuer-rechts-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="tuer-rechts-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="tuer-rechts-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="tuer-rechts-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="tuer-rechts-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="tuer-rechts-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="tuer-rechts-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="tuer-rechts-neuwert">-</div>
+                            <input type="number" id="tuer-rechts-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="tuer-rechts-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="tuer-rechts-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Heckklappe -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Heckklappe</div>
+                <select class="material-select" id="heckklappe-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="heckklappe-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="heckklappe-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="heckklappe-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="heckklappe-aw">-</div>
+                            <input type="number" class="aw-input" id="heckklappe-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="heckklappe-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="heckklappe-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="heckklappe-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="heckklappe-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="heckklappe-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="heckklappe-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="heckklappe-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="heckklappe-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="heckklappe-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="heckklappe-neuwert">-</div>
+                            <input type="number" id="heckklappe-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="heckklappe-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="heckklappe-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seitenwand links -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Seitenwand links</div>
+                <select class="material-select" id="seitenwand-links-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="seitenwand-links-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="seitenwand-links-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="seitenwand-links-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="seitenwand-links-aw">-</div>
+                            <input type="number" class="aw-input" id="seitenwand-links-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="seitenwand-links-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="seitenwand-links-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="seitenwand-links-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="seitenwand-links-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="seitenwand-links-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="seitenwand-links-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="seitenwand-links-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="seitenwand-links-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="seitenwand-links-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="seitenwand-links-neuwert">-</div>
+                            <input type="number" id="seitenwand-links-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="seitenwand-links-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="seitenwand-links-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Seitenwand rechts -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Seitenwand rechts</div>
+                <select class="material-select" id="seitenwand-rechts-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="seitenwand-rechts-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="seitenwand-rechts-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="seitenwand-rechts-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="seitenwand-rechts-aw">-</div>
+                            <input type="number" class="aw-input" id="seitenwand-rechts-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="seitenwand-rechts-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="seitenwand-rechts-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="seitenwand-rechts-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="seitenwand-rechts-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="seitenwand-rechts-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="seitenwand-rechts-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="seitenwand-rechts-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="seitenwand-rechts-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="seitenwand-rechts-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="seitenwand-rechts-neuwert">-</div>
+                            <input type="number" id="seitenwand-rechts-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="seitenwand-rechts-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="seitenwand-rechts-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dachholm links -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Dachholm links</div>
+                <select class="material-select" id="dachholm-links-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="dachholm-links-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="dachholm-links-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="dachholm-links-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="dachholm-links-aw">-</div>
+                            <input type="number" class="aw-input" id="dachholm-links-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="dachholm-links-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="dachholm-links-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="dachholm-links-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="dachholm-links-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="dachholm-links-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="dachholm-links-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="dachholm-links-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="dachholm-links-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="dachholm-links-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="dachholm-links-neuwert">-</div>
+                            <input type="number" id="dachholm-links-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="dachholm-links-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="dachholm-links-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dachholm rechts -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Dachholm rechts</div>
+                <select class="material-select" id="dachholm-rechts-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="dachholm-rechts-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="dachholm-rechts-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="dachholm-rechts-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="dachholm-rechts-aw">-</div>
+                            <input type="number" class="aw-input" id="dachholm-rechts-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="dachholm-rechts-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="dachholm-rechts-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="dachholm-rechts-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="dachholm-rechts-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="dachholm-rechts-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="dachholm-rechts-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="dachholm-rechts-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="dachholm-rechts-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="dachholm-rechts-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="dachholm-rechts-neuwert">-</div>
+                            <input type="number" id="dachholm-rechts-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="dachholm-rechts-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="dachholm-rechts-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dach -->
+        <div class="bauteil">
+            <div class="bauteil-header">
+                <div class="bauteil-title">Dach</div>
+                <select class="material-select" id="dach-material">
+                    <option value="metal">Metall</option>
+                    <option value="aluminium">Aluminium</option>
+                </select>
+            </div>
+            <div class="dellen-input">
+                <div class="dellen-group">
+                    <span>Dellen 10-20mm:</span>
+                    <input type="number" id="dach-10" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 30-40mm:</span>
+                    <input type="number" id="dach-30" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+                <div class="dellen-group">
+                    <span>Dellen 50mm+:</span>
+                    <input type="number" id="dach-50" min="0" value="0">
+                    <span>Anzahl</span>
+                </div>
+            </div>
+            <div class="results">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-label">Arbeitswerte (AW)</div>
+                        <div class="aw-input-container">
+                            <div class="result-value" id="dach-aw">-</div>
+                            <input type="number" class="aw-input" id="dach-aw-input" min="0" placeholder="Manuell">
+                        </div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Stunden</div>
+                        <div class="result-value" id="dach-stunden">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zerlegearbeiten</div>
+                        <div class="result-value" id="dach-zerlege">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Demontage</div>
+                        <div class="result-value" id="dach-demontage">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Klebetechnik</div>
+                        <div class="result-value" id="dach-klebetechnik">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Zuschlag Aluminium</div>
+                        <div class="result-value" id="dach-alu">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Vordrücken</div>
+                        <div class="result-value" id="dach-vordrücken">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackierung</div>
+                        <div class="result-value" id="dach-lackierung">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Lackstufe</div>
+                        <div class="result-value" id="dach-lackstufe">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hohlraumkonservierung</div>
+                        <div class="result-value" id="dach-hohlraum">-</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Neuwert (€)</div>
+                        <div class="neuwert-input">
+                            <div class="result-value" id="dach-neuwert">-</div>
+                            <input type="number" id="dach-neuwert-input" min="0" placeholder="Manuell eingeben">
+                        </div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Wirtschaftlicher Reparaturweg</div>
+                        <div class="result-value highlight" id="dach-reparaturweg">-</div>
+                    </div>
+                    <div class="result-item" style="grid-column: span 2;">
+                        <div class="result-label">Schadenhöhe (€)</div>
+                        <div class="result-value highlight" id="dach-schadenhoehe">- <span style="font-weight:normal">(PDR)</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button id="calculate-btn">Kalkulation durchführen</button>
+    </div>
+    
+    <div class="legende">
+        <h3>Legende & Regeln</h3>
+        <ul>
+            <li><strong>10er und 20er Dellen</strong> werden nicht gezählt (gemäß Allianz Guide)</li>
+            <li><strong>Lackstufe 4</strong> wird standardmäßig verwendet, außer bei Lackriss mit wenigen Dellen</li>
+            <li><strong>Klasse 5 Instandsetzungszeiten</strong> dürfen nicht über 16h gehen (bei Hauben nicht über 5,5h)</li>
+            <li><strong>Hohlraumkonservierung</strong> pauschal 15€, nur bei Erneuerung von Karosserieteilen überschreiten</li>
+            <li><strong>Zuschlag Aluminium</strong> 25% bei Aluminiumteilen</li>
+            <li><strong>Zuschlag Klebetechnik</strong> 30% bei Dachholmen und bauartbedingter Unzugänglichkeit</li>
+            <li><strong>Vordrücken</strong> entfällt bei Dellen ≤20mm und Eindringtiefe <0,2mm</li>
+            <li><strong>Wirtschaftlichkeit</strong> ist immer zu prüfen (ggf. PTP wählen)</li>
+            <li>Ab <strong>60% des Wiederbeschaffungswertes</strong> ist eine Restwertabfrage erforderlich</li>
+            <li><strong>Demontage</strong> ist immer erforderlich, wenn Zerlegearbeiten notwendig sind</li>
+            <li><strong>10 AW (Arbeitswerte)</strong> entsprechen <strong>1 Stunde</strong> Arbeitszeit</li>
+        </ul>
+    </div>
+    
+    <div class="signature">
+        <span class="copyright">C</span> PDR TEAM GmbH<br>
+        Ersteller: Seif Sherif
+    </div>
+
+    <script>
+        // Durchschnittliche Neuwert-Preise für Bauteile (Quelle: Internetrecherche)
+        const NEUWERTE = {
+            'Motorhaube': 800,
+            'Kotflügel links': 450,
+            'Kotflügel rechts': 450,
+            'Tür links': 1200,
+            'Tür rechts': 1200,
+            'Heckklappe': 1000,
+            'Seitenwand links': 1500,
+            'Seitenwand rechts': 1500,
+            'Dachholm links': 600,
+            'Dachholm rechts': 600,
+            'Dach': 2000
+        };
+
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const stundensatz = parseFloat(document.getElementById('stundensatz').value);
+            if (isNaN(stundensatz) || stundensatz <= 0) {
+                alert("Bitte geben Sie einen gültigen Stundensatz ein!");
+                return;
+            }
+            
+            calculateBauteil('haube', 'Motorhaube', stundensatz);
+            calculateBauteil('kotfluegel-links', 'Kotflügel links', stundensatz);
+            calculateBauteil('kotfluegel-rechts', 'Kotflügel rechts', stundensatz);
+            calculateBauteil('tuer-links', 'Tür links', stundensatz);
+            calculateBauteil('tuer-rechts', 'Tür rechts', stundensatz);
+            calculateBauteil('heckklappe', 'Heckklappe', stundensatz);
+            calculateBauteil('seitenwand-links', 'Seitenwand links', stundensatz);
+            calculateBauteil('seitenwand-rechts', 'Seitenwand rechts', stundensatz);
+            calculateBauteil('dachholm-links', 'Dachholm links', stundensatz);
+            calculateBauteil('dachholm-rechts', 'Dachholm rechts', stundensatz);
+            calculateBauteil('dach', 'Dach', stundensatz);
+        });
+        
+        function calculateBauteil(prefix, bauteilName, stundensatz) {
+            const material = document.getElementById(`${prefix}-material`).value;
+            const dellen30 = parseInt(document.getElementById(`${prefix}-30`).value) || 0;
+            const dellen50 = parseInt(document.getElementById(`${prefix}-50`).value) || 0;
+            const gesamtDellen = dellen30 + dellen50;
+            
+            // Neuwert bestimmen (geschätzter Wert oder manuelle Eingabe)
+            let neuwert = NEUWERTE[bauteilName];
+            const manualNeuwertInput = document.getElementById(`${prefix}-neuwert-input`).value;
+            if (manualNeuwertInput && !isNaN(manualNeuwertInput) && parseFloat(manualNeuwertInput) > 0) {
+                neuwert = parseFloat(manualNeuwertInput);
+            }
+            document.getElementById(`${prefix}-neuwert`).textContent = neuwert + '€';
+            
+            // Faktoren für die AW-Berechnung je nach Bauteil
+            let awFaktor = 0;
+            switch(bauteilName) {
+                case 'Motorhaube': awFaktor = 0.5; break;
+                case 'Kotflügel links':
+                case 'Kotflügel rechts': awFaktor = 0.4; break;
+                case 'Tür links':
+                case 'Tür rechts': awFaktor = 0.45; break;
+                case 'Heckklappe': awFaktor = 0.5; break;
+                case 'Seitenwand links':
+                case 'Seitenwand rechts': awFaktor = 0.6; break;
+                case 'Dachholm links':
+                case 'Dachholm rechts': awFaktor = 0.4; break;
+                case 'Dach': awFaktor = 0.7; break;
+            }
+            
+            // AW berechnen (10 AW = 1 Stunde)
+            let aw = gesamtDellen * awFaktor;
+            
+            // Manuelle AW-Eingabe prüfen und ggf. verwenden
+            const manualAwInput = document.getElementById(`${prefix}-aw-input`).value;
+            if (manualAwInput && !isNaN(manualAwInput) && parseFloat(manualAwInput) >= 0) {
+                aw = parseFloat(manualAwInput);
+            }
+            
+            const stunden = aw / 10;
+            
+            // Aluminium-Zuschlag
+            const aluZuschlag = material === 'aluminium' ? 1.25 : 1;
+            
+            // Bauteil-spezifische Logik
+            let zerlegearbeiten = '-';
+            let demontage = 'Nein';
+            let klebetechnik = 'Nein';
+            let zuschlagAlu = material === 'aluminium' ? '25%' : '0%';
+            let vordruecken = dellen50 > 0 ? 'Ja' : 'Nein';
+            let lackierung = 'Nein';
+            let lackstufe = '4';
+            let hohlraum = '15€';
+            let reparaturweg = 'Sanfte Instandsetzung';
+            
+            // Wirtschaftlichkeitsprüfung für Lackierung
+            if (bauteilName === 'Motorhaube') {
+                if (stunden > 5.5) {
+                    reparaturweg = 'PTP Instandsetzung (Lackierung notwendig)';
+                    lackierung = 'Ja';
+                    // Wenn Lackierung notwendig ist, muss auch Vordrücken aktiviert sein
+                    vordruecken = 'Ja';
+                }
+            } else {
+                if (stunden > 16) {
+                    reparaturweg = 'PTP Instandsetzung (Lackierung notwendig)';
+                    lackierung = 'Ja';
+                    // Wenn Lackierung notwendig ist, muss auch Vordrücken aktiviert sein
+                    vordruecken = 'Ja';
+                }
+            }
+            
+            // Schadenhöhe berechnen (unterschiedlich für PDR und PTP)
+            let schadenhoehePDR = 0;
+            let schadenhoehePTP = 0;
+            
+            if (lackierung === 'Ja') {
+                // Bei PTP: 70% der AW für Instandsetzung + Lackkosten (30% des Neuwertes)
+                schadenhoehePTP = (stunden * stundensatz * 0.7 * aluZuschlag) + (neuwert * 0.3);
+                schadenhoehePDR = (stunden * stundensatz * aluZuschlag);
+            } else {
+                // Normale PDR Berechnung
+                schadenhoehePDR = (stunden * stundensatz * aluZuschlag);
+                schadenhoehePTP = schadenhoehePDR; // Falls kein Unterschied
+            }
+            
+            // Wirtschaftlichkeitsprüfung: Vergleich mit Neuwert
+            let schadenhoeheFinal = schadenhoehePDR;
+            let reparaturArt = 'PDR';
+            
+            if (schadenhoehePDR > neuwert * 0.9) {
+                // Wenn Reparatur mehr als 90% des Neuwertes kostet
+                reparaturweg = 'Neubeschaffung wirtschaftlicher';
+                schadenhoeheFinal = neuwert;
+                reparaturArt = 'Neubeschaffung';
+            } else if (lackierung === 'Ja' && schadenhoehePTP < schadenhoehePDR * 1.2) {
+                // Wenn PTP nicht viel teurer ist als PDR (bis zu 20%)
+                schadenhoeheFinal = schadenhoehePTP;
+                reparaturArt = 'PTP';
+            }
+            
+            // Bauteil-spezifische Zerlegearbeiten
+            switch(bauteilName) {
+                case 'Motorhaube':
+                    if (gesamtDellen <= 30) {
+                        zerlegearbeiten = 'Dämmmate';
+                        demontage = 'Nein';
+                    } else {
+                        zerlegearbeiten = 'Dämmmate';
+                        demontage = 'Ja';
+                    }
+                    break;
+                    
+                case 'Kotflügel links':
+                case 'Kotflügel rechts':
+                    if (gesamtDellen <= 10) {
+                        zerlegearbeiten = 'Nein';
+                        demontage = 'Nein';
+                    } else {
+                        zerlegearbeiten = 'Radhausverkleidung';
+                        demontage = 'Ja';
+                    }
+                    break;
+                    
+                case 'Tür links':
+                case 'Tür rechts':
+                    zerlegearbeiten = gesamtDellen <= 15 ? 'Schachtleiste' : 'Schachtleiste, Türverkleidung';
+                    demontage = 'Ja';
+                    break;
+                    
+                case 'Heckklappe':
+                    zerlegearbeiten = 'Innenverkleidung, 3. Bremsleuchte';
+                    demontage = 'Ja';
+                    break;
+                    
+                case 'Seitenwand links':
+                case 'Seitenwand rechts':
+                    if (gesamtDellen <= 15) {
+                        zerlegearbeiten = 'Nein';
+                        klebetechnik = 'Ja';
+                        demontage = 'Nein';
+                    } else {
+                        zerlegearbeiten = 'Innenverkleidung, Rückleuchte';
+                        demontage = 'Ja';
+                    }
+                    break;
+                    
+                case 'Dachholm links':
+                case 'Dachholm rechts':
+                    zerlegearbeiten = 'Nein';
+                    klebetechnik = 'Ja';
+                    demontage = 'Nein';
+                    break;
+                    
+                case 'Dach':
+                    if (gesamtDellen <= 40) {
+                        zerlegearbeiten = 'Nein';
+                        klebetechnik = 'Ja';
+                        demontage = 'Nein';
+                    } else if (gesamtDellen <= 100) {
+                        zerlegearbeiten = 'Dachhimmel incl. Dämmmatten';
+                        demontage = 'Ja';
+                    } else {
+                        zerlegearbeiten = 'Dachhimmel incl. Dämmmatten, Dachreling, Antenne, Heckklappe';
+                        demontage = 'Ja';
+                    }
+                    break;
+            }
+            
+            // Ergebnisse anzeigen
+            document.getElementById(`${prefix}-aw`).textContent = aw.toFixed(1);
+            document.getElementById(`${prefix}-zerlege`).textContent = zerlegearbeiten;
+            document.getElementById(`${prefix}-demontage`).textContent = demontage;
+            document.getElementById(`${prefix}-klebetechnik`).textContent = klebetechnik;
+            document.getElementById(`${prefix}-alu`).textContent = zuschlagAlu;
+            document.getElementById(`${prefix}-vordrücken`).textContent = vordruecken;
+            document.getElementById(`${prefix}-lackierung`).textContent = lackierung;
+            document.getElementById(`${prefix}-lackstufe`).textContent = lackstufe;
+            document.getElementById(`${prefix}-hohlraum`).textContent = hohlraum;
+            
+            // Reparaturweg mit Warnung wenn Neubeschaffung wirtschaftlicher
+            const reparaturwegElement = document.getElementById(`${prefix}-reparaturweg`);
+            reparaturwegElement.textContent = reparaturweg;
+            if (reparaturweg === 'Neubeschaffung wirtschaftlicher') {
+                reparaturwegElement.classList.add('error');
+                reparaturwegElement.classList.remove('highlight');
+            } else {
+                reparaturwegElement.classList.remove('error');
+                reparaturwegElement.classList.add('highlight');
+            }
+            
+            // Schadenhöhe anzeigen
+            const schadenhoeheElement = document.getElementById(`${prefix}-schadenhoehe`);
+            if (reparaturArt === 'Neubeschaffung') {
+                schadenhoeheElement.innerHTML = 
+                    '<span class="error">' + schadenhoeheFinal.toFixed(2) + '€</span> <span style="font-weight:normal">(' + reparaturArt + ')</span>';
+            } else if (reparaturArt === 'PTP') {
+                schadenhoeheElement.innerHTML = 
+                    '<span class="warning">' + schadenhoeheFinal.toFixed(2) + '€</span> <span style="font-weight:normal">(' + reparaturArt + ')</span>';
+            } else {
+                schadenhoeheElement.innerHTML = 
+                    schadenhoeheFinal.toFixed(2) + '€ <span style="font-weight:normal">(' + reparaturArt + ')</span>';
+            }
+            
+            document.getElementById(`${prefix}-stunden`).textContent = stunden.toFixed(1);
+        }
+    </script>
+</body>
+</html>
